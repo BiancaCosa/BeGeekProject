@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Welcome to BeGeek!</title>
+        <title>Be Geek - Gafas de sol y graduadas para auténticos Geeks</title>
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     </head>
     <body>
@@ -51,17 +51,62 @@
         </div>
         </nav> 
     </div>
-     <div class="container">
-            <div style="position: relative; left: 0; top: 0;">
-                <img src="{{ asset('img/portadalim.jpg') }}" class="eye"/>
-                <img src="{{ asset('img/adult-face.jpg') }}" class="heaven"/>
+      <div class="container">
+            <div class="portada1">
+                <div class="portada2">
+                    <img src="{{ asset('img/portadalim.jpg') }}" class="logo"/>
+                    <button class="buttonCatalogo">CATÁLOGO</button>
+                </div>
+                <img src="{{ asset('img/adult-face.jpg') }}" class="face"/>
 	        </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">col-sm</div>
-                <div class="col-sm-4">col-sm</div>
-                <div class="col-sm-4">col-sm</div>
+            <div class='row' id='buttonsDiv'>
+                <button class="buttonBasic">OFERTAS    ></button>
+                <button class="buttonBasic">NOVEDADES  ></button>
+                <button class="buttonBasic">PROMOCIONES ></button>
+            </div>
+            <div class='row' id="catalogo">
+                <div class="col-sm-4">                  
+                    <img src="{{ asset('img/gafa1.jpg') }}" alt="BeGeek gafas de sol" style="width:100%">
+                    <h2>GAFAS GEEK 1</h2>
+                    <p class="price">30 $</p>
+                    <p>Recíbelo ya.</p>
+                    <img src="{{ asset('img/stars.png') }}" alt="BeGeek gafas de sol" style="width:100%">
+                </div>
+                <div class="col-sm-4">                  
+                    <img src="{{ asset('img/gafa2.jpg') }}" alt="BeGeek gafas de sol" style="width:100%">
+                    <h2>GAFAS GEEK 2</h2>
+                    <p class="price">30 $</p>
+                    <p>Recíbelo ya.</p>
+                    <img src="{{ asset('img/stars.png') }}" alt="BeGeek gafas de sol" style="width:100%">
+                </div>
+                <div class="col-sm-4">                  
+                    <img src="{{ asset('img/gafa3.jpg') }}" alt="BeGeek gafas de sol" style="width:100%">
+                    <h2>GAFAS GEEK 3</h2>
+                    <p class="price">30 $</p>
+                    <p>Recíbelo ya.</p>
+                    <img src="{{ asset('img/stars.png') }}" alt="BeGeek gafas de sol" style="width:100%">
+                </div> 
+                <div class="col-sm-4">                  
+                    <img src="{{ asset('img/gafa4.jpg') }}" alt="BeGeek gafas de sol" style="width:100%">
+                    <h2>GAFAS GEEK 4</h2>
+                    <p class="price">30 $</p>
+                    <p>Recíbelo ya.</p>
+                    <img src="{{ asset('img/stars.png') }}" alt="BeGeek gafas de sol" style="width:100%">
+                </div>
+                <div class="col-sm-4">                  
+                    <img src="{{ asset('img/gafa5.jpg') }}" alt="BeGeek gafas de sol" style="width:100%">
+                    <h2>GAFAS GEEK 5</h2>
+                    <p class="price">30 $</p>
+                    <p>Recíbelo ya.</p>
+                    <img src="{{ asset('img/stars.png') }}" alt="BeGeek gafas de sol" style="width:100%">
+                </div>
+                <div class="col-sm-4">                  
+                    <img src="{{ asset('img/gafa6.jpg') }}" alt="BeGeek gafas de sol" style="width:100%">
+                    <h2>GAFAS GEEK 6</h2>
+                    <p class="price">30 $</p>
+                    <p>Recíbelo ya.</p>
+                    <img src="{{ asset('img/stars.png') }}" alt="BeGeek gafas de sol" style="width:100%">
+                </div>   
             </div>
         </div>
     </body>
