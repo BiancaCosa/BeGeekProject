@@ -156,4 +156,3 @@ class Product
         return $this->image;
     }
 }
-

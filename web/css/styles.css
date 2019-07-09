@@ -1,0 +1,16 @@
+.eye{
+  position:absolute;
+  height:auto;
+  width:40em;
+  top: 40em;
+  left : 40em;
+  z-index: 1;
+}
+
+.heaven
+{
+  position:absolute;
+  height:auto;
+  width:40em;
+  z-index: -1;
+}
