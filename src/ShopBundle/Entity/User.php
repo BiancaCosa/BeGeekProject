@@ -3,6 +3,8 @@
 namespace ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * User
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="ShopBundle\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -41,7 +43,7 @@ class User
      * @ORM\Column(name="email", type="string", length=100, unique=true)
      */
     private $email;
-
+    
     /**
      * @var bool
      *
@@ -56,6 +58,15 @@ class User
      */
     private $nameComplete;
 
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    public function __construct()
+    {
+        $this->isActive = true;
+    }
 
     /**
      * Get id
@@ -105,11 +116,46 @@ class User
         return $this;
     }
 
-    /**
-     * Get password
-     *
-     * @return string
-     */
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->premium,
+            $this->nameComplete,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->premium,
+            $this->nameComplete,
+        ) = unserialize($serialized);
+    }
+
+    public function getSalt()
+    {
+    
+        return null;
+    }
+
+    
     public function getPassword()
     {
         return $this->password;
@@ -117,10 +163,9 @@ class User
 
     /**
      * Set email
+    * @Route string $email
      *
-     * @param string $email
-     *
-     * @return User
+     *@return User
      */
     public function setEmail($email)
     {
@@ -129,23 +174,13 @@ class User
         return $this;
     }
 
-    /**
-     * Get email
-     *
-     * @return string
-     */
+   
     public function getEmail()
     {
         return $this->email;
     }
 
-    /**
-     * Set premium
-     *
-     * @param boolean $premium
-     *
-     * @return User
-     */
+    
     public function setPremium($premium)
     {
         $this->premium = $premium;
@@ -153,11 +188,7 @@ class User
         return $this;
     }
 
-    /**
-     * Get premium
-     *
-     * @return bool
-     */
+    
     public function getPremium()
     {
         return $this->premium;
@@ -177,13 +208,31 @@ class User
         return $this;
     }
 
-    /**
-     * Get nameComplete
-     *
-     * @return string
-     */
     public function getNameComplete()
     {
         return $this->nameComplete;
     }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->isActive;
+    }
+
+   
 }
+    

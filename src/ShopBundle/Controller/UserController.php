@@ -3,9 +3,12 @@
 namespace ShopBundle\Controller;
 
 use ShopBundle\Entity\User;
+use ShopBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * User controller.
@@ -14,22 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class UserController extends Controller
 {
-    /**
-     * Lists all user entities.
-     *
-     * @Route("/", name="user_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('ShopBundle:User')->findAll();
-
-        return $this->render('user/index.html.twig', array(
-            'users' => $users,
-        ));
-    }
 
     /**
      * Creates a new user entity.
@@ -72,11 +59,11 @@ class UserController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-
+    
     /**
      * Displays a form to edit an existing user entity.
      *
-     * @Route("/{id}/edit", name="user_edit")
+     * @Route("/{id}/edit", name="useredit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, User $user)
@@ -88,7 +75,7 @@ class UserController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('useredit', array('id' => $user->getId()));
         }
 
         return $this->render('user/edit.html.twig', array(
@@ -96,6 +83,101 @@ class UserController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+
+    /**
+     * @Route("/register", name="user_registration")
+     */
+    public function registerAction(Request $request)
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+       
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirectToRoute('user/.register.html.twig');
+        }
+
+        return $this->render(
+            'user/index.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+
+    
+
+    /**
+     * @Route("/login", name="login", methods={"GET","POST"}, requirements={"id"="\d+"})
+     * ("id", class="User", options={"id": "id"})
+     */
+    public function loginAction(Request $request)
+    {
+        $authenticationUtils = $this->get('security.authentication_utils');
+
+        // obtener el error de login si hay
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // último nombre de usuario introducido por el usuario
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render(
+            'users/login.html.twig',
+            array(
+                // last username entered by the user
+                'last_username' => $lastUsername,
+                'error'         => $error,
+            )
+        );
+    }
+
+    /**
+    * @Route("/login_check", name="login_check")
+    */
+    public function loginCheckAction()
+    {
+        // este controller no se ejecuta que la route se maneja por el sistema de seguridad
+    
+    }
+
+    /**
+     * Lists all user entities.
+     *
+     * @Route("/userlist", name="userList")
+     * @Method("GET")
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $users = $em->getRepository('ShopBundle:User')->findAll();
+
+        return $this->render('user/index.html.twig', array(
+            'users' => $users,
+        ));
+    }
+
+     /**
+     * Creates a form to delete a user entity.
+     *
+     * @param User $user The user entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(User $user)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('user_delete', array('id' => $user->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
     }
 
     /**
@@ -118,19 +200,5 @@ class UserController extends Controller
         return $this->redirectToRoute('user_index');
     }
 
-    /**
-     * Creates a form to delete a user entity.
-     *
-     * @param User $user The user entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(User $user)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('user_delete', array('id' => $user->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+
 }
