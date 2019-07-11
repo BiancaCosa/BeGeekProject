@@ -5,6 +5,7 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * User
@@ -44,13 +45,6 @@ class User implements UserInterface
      */
     private $email;
     
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="premium", type="boolean")
-     */
-    private $premium;
-
     /**
      * @var string
      *
@@ -132,7 +126,6 @@ class User implements UserInterface
             $this->id,
             $this->username,
             $this->password,
-            $this->premium,
             $this->nameComplete,
         ));
     }
@@ -144,7 +137,6 @@ class User implements UserInterface
             $this->id,
             $this->username,
             $this->password,
-            $this->premium,
             $this->nameComplete,
         ) = unserialize($serialized);
     }
@@ -178,20 +170,6 @@ class User implements UserInterface
     public function getEmail()
     {
         return $this->email;
-    }
-
-    
-    public function setPremium($premium)
-    {
-        $this->premium = $premium;
-
-        return $this;
-    }
-
-    
-    public function getPremium()
-    {
-        return $this->premium;
     }
 
     /**

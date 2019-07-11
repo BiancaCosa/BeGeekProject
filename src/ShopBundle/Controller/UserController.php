@@ -5,15 +5,14 @@ namespace ShopBundle\Controller;
 use ShopBundle\Entity\User;
 use ShopBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response; 
 
 /**
  * User controller.
  *
- * @Route("user")
+ * @Route("/user")
  */
 class UserController extends Controller
 {
@@ -22,7 +21,6 @@ class UserController extends Controller
      * Creates a new user entity.
      *
      * @Route("/new", name="user_new")
-     * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -47,8 +45,7 @@ class UserController extends Controller
     /**
      * Finds and displays a user entity.
      *
-     * @Route("/{id}", name="user_show")
-     * @Method("GET")
+     * @Route("/show/{id}", name="user_show")
      */
     public function showAction(User $user)
     {
@@ -63,8 +60,8 @@ class UserController extends Controller
     /**
      * Displays a form to edit an existing user entity.
      *
-     * @Route("/{id}/edit", name="useredit")
-     * @Method({"GET", "POST"})
+     * @Route("/edit/{id}", name="useredit")
+     * 
      */
     public function editAction(Request $request, User $user)
     {
@@ -115,11 +112,12 @@ class UserController extends Controller
     
 
     /**
-     * @Route("/login", name="login", methods={"GET","POST"}, requirements={"id"="\d+"})
-     * ("id", class="User", options={"id": "id"})
+     * @Route("/login", name="login")
      */
     public function loginAction(Request $request)
     {
+
+        
         $authenticationUtils = $this->get('security.authentication_utils');
 
         // obtener el error de login si hay
@@ -129,7 +127,7 @@ class UserController extends Controller
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render(
-            'users/login.html.twig',
+            'user/login.html.twig',
             array(
                 // last username entered by the user
                 'last_username' => $lastUsername,
@@ -151,7 +149,6 @@ class UserController extends Controller
      * Lists all user entities.
      *
      * @Route("/userlist", name="userList")
-     * @Method("GET")
      */
     public function indexAction()
     {
@@ -160,7 +157,7 @@ class UserController extends Controller
         $users = $em->getRepository('ShopBundle:User')->findAll();
 
         return $this->render('user/index.html.twig', array(
-            'users' => $users,
+            'users' => $users
         ));
     }
 
@@ -183,8 +180,8 @@ class UserController extends Controller
     /**
      * Deletes a user entity.
      *
-     * @Route("/{id}", name="user_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="user_delete")
+     * 
      */
     public function deleteAction(Request $request, User $user)
     {

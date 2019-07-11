@@ -6,7 +6,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\BooleanType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -17,7 +16,6 @@ class UserType extends AbstractType
         $builder
             ->add('email', EmailType::class)
             ->add('username', TextType::class)
-            ->add('premium', BooleanType::class)
             ->add('nameComplete', TextType::class)
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,

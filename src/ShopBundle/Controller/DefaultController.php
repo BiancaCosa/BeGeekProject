@@ -3,7 +3,8 @@
 namespace ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
+
 
 class DefaultController extends Controller
 {
@@ -14,4 +15,14 @@ class DefaultController extends Controller
     {
         return $this->render('@Shop/Default/index.html.twig');
     }
+
+    /**
+     * @Route("/cart", name="cart")
+     */
+    public function initializeCartAction()
+    {
+        return $this->render('product/cart.html.twig');
+    }
+
+
 }
