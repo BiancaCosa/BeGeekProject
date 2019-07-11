@@ -76,7 +76,7 @@ class ProductController extends Controller
     /**
      * Displays a form to edit an existing product entity.
      *
-     * @Route("/{id}/edit", name="product_edit")
+     * @Route("/edit/{id}", name="product_edit")
      * 
      */
     public function editAction(Request $request, Product $product)
