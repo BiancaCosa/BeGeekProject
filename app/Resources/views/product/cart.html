@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!DOCTYPE html>
+<html>
+    <head>
+        <title>Be Geek - Gafas de sol y graduadas para auténticos Geeks</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    </head>
+    <body>
+    <div class="container">
+        <img src="{{ asset('img/gafa3.png') }}" alt="Gafas Geek 3">
+        <div id="details"> 
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Model</th>
+                        <td>{{ product.model }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ product.id }}</td>
+                    </tr>    
+
+                    <tr>
+                        <th>Price</th>
+                        <td>{{ product.price }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Image</th>
+                        <td>{{ product.image }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    

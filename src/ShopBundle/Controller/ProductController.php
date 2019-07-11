@@ -18,7 +18,7 @@ class ProductController extends Controller
     /**
      * Lists all product entities.
      *
-     * @Route("/", name="product_index")
+     * @Route("/list", name="productlist")
      * @Method("GET")
      */
     public function indexAction()
@@ -116,7 +116,7 @@ class ProductController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('product_index');
+        return $this->redirectToRoute('productlist');
     }
 
     /**

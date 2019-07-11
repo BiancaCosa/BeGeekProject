@@ -14,4 +14,14 @@ class DefaultController extends Controller
     {
         return $this->render('@Shop/Default/index.html.twig');
     }
+
+    /**
+     * @Route("/cart", name="cart")
+     */
+    public function initializeCartAction()
+    {
+        return $this->render('product/cart.html.twig');
+    }
+
+
 }
