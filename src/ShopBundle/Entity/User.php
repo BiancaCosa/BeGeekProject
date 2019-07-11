@@ -46,13 +46,6 @@ class User implements UserInterface
     private $email;
     
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="premium", type="boolean")
-     */
-    private $premium;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="nameComplete", type="string", length=180)
@@ -133,7 +126,6 @@ class User implements UserInterface
             $this->id,
             $this->username,
             $this->password,
-            $this->premium,
             $this->nameComplete,
         ));
     }
@@ -145,7 +137,6 @@ class User implements UserInterface
             $this->id,
             $this->username,
             $this->password,
-            $this->premium,
             $this->nameComplete,
         ) = unserialize($serialized);
     }
@@ -179,20 +170,6 @@ class User implements UserInterface
     public function getEmail()
     {
         return $this->email;
-    }
-
-    
-    public function setPremium($premium)
-    {
-        $this->premium = $premium;
-
-        return $this;
-    }
-
-    
-    public function getPremium()
-    {
-        return $this->premium;
     }
 
     /**

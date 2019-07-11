@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Product controller.
  *
- * @Route("product")
+ * @Route("/product")
  */
 class ProductController extends Controller
 {
@@ -60,7 +60,11 @@ class ProductController extends Controller
     /**
      * Finds and displays a product entity.
      *
+<<<<<<< HEAD
      * @Route("/{id}", name="product_show")
+=======
+     * @Route("/show/{id}", name="product_show")
+>>>>>>> arreglito
      *
      */
     public function showAction(Product $product)
@@ -101,7 +105,11 @@ class ProductController extends Controller
     /**
      * Deletes a product entity.
      *
+<<<<<<< HEAD
      * @Route("/{id}", name="product_delete")
+=======
+     * @Route("/delete/{id}", name="product_delete")
+>>>>>>> arreglito
      * 
      */
     public function deleteAction(Request $request, Product $product)

@@ -7,13 +7,17 @@ use ShopBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+<<<<<<< HEAD
 use Symfony\Component\HttpFoundation\Response;
 
+=======
+use Symfony\Component\HttpFoundation\Response; 
+>>>>>>> arreglito
 
 /**
  * User controller.
  *
- * @Route("user")
+ * @Route("/user")
  */
 class UserController extends Controller
 {
@@ -57,7 +61,24 @@ class UserController extends Controller
         ));
     }
 
+<<<<<<< HEAD
     
+=======
+    /**
+     * Finds and displays a user entity.
+     *
+     * @Route("/show/{id}", name="user_show")
+     */
+    public function showAction(User $user)
+    {
+        $deleteForm = $this->createDeleteForm($user);
+
+        return $this->render('user/show.html.twig', array(
+            'user' => $user,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+>>>>>>> arreglito
     
     /**
      * Displays a form to edit an existing user entity.
@@ -114,11 +135,17 @@ class UserController extends Controller
     
 
     /**
+<<<<<<< HEAD
      * @Route("/login", name="login",method={"GET"})
      * 
+=======
+     * @Route("/login", name="login")
+>>>>>>> arreglito
      */
     public function loginAction(Request $request)
     {
+
+        
         $authenticationUtils = $this->get('security.authentication_utils');
 
         // obtener el error de login si hay
@@ -128,7 +155,7 @@ class UserController extends Controller
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render(
-            'users/login.html.twig',
+            'user/login.html.twig',
             array(
                 // last username entered by the user
                 'last_username' => $lastUsername,
@@ -158,7 +185,7 @@ class UserController extends Controller
         $users = $em->getRepository('ShopBundle:User')->findAll();
 
         return $this->render('user/index.html.twig', array(
-            'users' => $users,
+            'users' => $users
         ));
     }
 
@@ -181,7 +208,11 @@ class UserController extends Controller
     /**
      * Deletes a user entity.
      *
+<<<<<<< HEAD
      * @Route("/{id}", name="user_delete")
+=======
+     * @Route("/delete/{id}", name="user_delete")
+>>>>>>> arreglito
      * 
      */
     public function deleteAction(Request $request, User $user)
