@@ -4,8 +4,7 @@ namespace ShopBundle\Controller;
 
 use ShopBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -19,7 +18,7 @@ class ProductController extends Controller
      * Lists all product entities.
      *
      * @Route("/list", name="productlist")
-     * @Method("GET")
+     * 
      */
     public function indexAction()
     {
@@ -36,7 +35,7 @@ class ProductController extends Controller
      * Creates a new product entity.
      *
      * @Route("/new", name="product_new")
-     * @Method({"GET", "POST"})
+     * 
      */
     public function newAction(Request $request)
     {
@@ -62,7 +61,7 @@ class ProductController extends Controller
      * Finds and displays a product entity.
      *
      * @Route("/{id}", name="product_show")
-     * @Method("GET")
+     *
      */
     public function showAction(Product $product)
     {
@@ -78,7 +77,7 @@ class ProductController extends Controller
      * Displays a form to edit an existing product entity.
      *
      * @Route("/{id}/edit", name="product_edit")
-     * @Method({"GET", "POST"})
+     * 
      */
     public function editAction(Request $request, Product $product)
     {
@@ -103,7 +102,7 @@ class ProductController extends Controller
      * Deletes a product entity.
      *
      * @Route("/{id}", name="product_delete")
-     * @Method("DELETE")
+     * 
      */
     public function deleteAction(Request $request, Product $product)
     {

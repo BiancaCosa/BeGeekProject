@@ -5,9 +5,7 @@ namespace ShopBundle\Controller;
 use ShopBundle\Entity\User;
 use ShopBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -22,7 +20,6 @@ class UserController extends Controller
      * Creates a new user entity.
      *
      * @Route("/new", name="user_new")
-     * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -48,7 +45,6 @@ class UserController extends Controller
      * Finds and displays a user entity.
      *
      * @Route("/{id}", name="user_show")
-     * @Method("GET")
      */
     public function showAction(User $user)
     {
@@ -64,7 +60,7 @@ class UserController extends Controller
      * Displays a form to edit an existing user entity.
      *
      * @Route("/{id}/edit", name="useredit")
-     * @Method({"GET", "POST"})
+     * 
      */
     public function editAction(Request $request, User $user)
     {
@@ -115,7 +111,7 @@ class UserController extends Controller
     
 
     /**
-     * @Route("/login", name="login", methods={"GET","POST"}, requirements={"id"="\d+"})
+     * @Route("/login", name="login")
      * ("id", class="User", options={"id": "id"})
      */
     public function loginAction(Request $request)
@@ -151,7 +147,6 @@ class UserController extends Controller
      * Lists all user entities.
      *
      * @Route("/userlist", name="userList")
-     * @Method("GET")
      */
     public function indexAction()
     {
@@ -184,7 +179,7 @@ class UserController extends Controller
      * Deletes a user entity.
      *
      * @Route("/{id}", name="user_delete")
-     * @Method("DELETE")
+     * 
      */
     public function deleteAction(Request $request, User $user)
     {
