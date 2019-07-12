@@ -69,4 +69,4 @@ swiftmailer:
 
 sensio_framework_extra:
    router:
-        annotations: true
+        annotations: false

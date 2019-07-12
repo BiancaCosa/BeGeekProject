@@ -4,7 +4,7 @@ shop:
     prefix:   /shop
 
 app:
-    resource: '@ShopBundle/Controller/'
+    resource: '@AppBundle/Controller/'
     type: annotation
 
 logout:

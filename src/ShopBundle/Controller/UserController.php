@@ -7,13 +7,7 @@ use ShopBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-<<<<<<< HEAD
-use Symfony\Component\HttpFoundation\Response;
-
-=======
 use Symfony\Component\HttpFoundation\Response; 
->>>>>>> arreglito
-
 /**
  * User controller.
  *
@@ -21,20 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UserController extends Controller
 {
-    /**
-     * Finds and displays a user entity.
-     *
-     * @Route("/{id}", name="user_show")
-     */
-    public function showAction(User $user)
-    {
-        $deleteForm = $this->createDeleteForm($user);
-
-        return $this->render('user/show.html.twig', array(
-            'user' => $user,
-            'delete_form' => $deleteForm->createView()
-        ));
-    }
 
     /**
      * Creates a new user entity.
@@ -44,7 +24,7 @@ class UserController extends Controller
     public function newAction(Request $request)
     {
         $user = new User();
-        $form = $this->createForm('@Shop\Form\UserType', $user);
+        $form = $this->createForm('ShopBundle\Form\UserType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,17 +37,15 @@ class UserController extends Controller
 
         return $this->render('user/new.html.twig', array(
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ));
     }
 
-<<<<<<< HEAD
-    
-=======
+  
     /**
      * Finds and displays a user entity.
      *
-     * @Route("/show/{id}", name="user_show")
+     * @Route("/{id}", name="user_show")
      */
     public function showAction(User $user)
     {
@@ -78,18 +56,17 @@ class UserController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
->>>>>>> arreglito
     
     /**
      * Displays a form to edit an existing user entity.
      *
-     * @Route("/edit/{id}", name="useredit")
+     * @Route("/{id}/edit", name="useredit")
      * 
      */
     public function editAction(Request $request, User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('@Shop\Form\UserType', $user);
+        $editForm = $this->createForm('ShopBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -101,7 +78,7 @@ class UserController extends Controller
         return $this->render('user/edit.html.twig', array(
             'user' => $user,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView()
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -123,7 +100,7 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute('user/register.html.twig');
+            return $this->redirectToRoute('user/.register.html.twig');
         }
 
         return $this->render(
@@ -135,12 +112,8 @@ class UserController extends Controller
     
 
     /**
-<<<<<<< HEAD
-     * @Route("/login", name="login",method={"GET"})
-     * 
-=======
      * @Route("/login", name="login")
->>>>>>> arreglito
+     * 
      */
     public function loginAction(Request $request)
     {
@@ -208,11 +181,7 @@ class UserController extends Controller
     /**
      * Deletes a user entity.
      *
-<<<<<<< HEAD
      * @Route("/{id}", name="user_delete")
-=======
-     * @Route("/delete/{id}", name="user_delete")
->>>>>>> arreglito
      * 
      */
     public function deleteAction(Request $request, User $user)
